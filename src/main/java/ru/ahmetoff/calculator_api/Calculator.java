@@ -1,5 +1,6 @@
 package ru.ahmetoff.calculator_api;
 
+import org.json.JSONObject;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +30,11 @@ public class Calculator extends HttpServlet {
             answer = a / b;
         }
 
-        response.setContentType("text/html");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
-        out.println("<h1>" + String.format("%.2f", answer) + "<h1>");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("answer", answer);
+        out.println(jsonObject);
     }
 
     public void destroy() {
